@@ -2,6 +2,9 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+// Run it with 
+// npm run dev
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,6 +15,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src/views'));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'src/views/home.html'));
