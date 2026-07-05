@@ -1,5 +1,5 @@
 /* ==========================================
-   1. ESTILOS BASE Y DISPOSITIVOS MÓVILES (SMALL)
+   1. BASE STYLES & MOBILE DEVICES (SMALL)
    ========================================== */
 :root {
     --primary-color: #0F4C81;
@@ -25,9 +25,14 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     font-size: 16px;
+
+    /* Layout configuration for vertical alignment */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* Tipografía */
+/* Typography */
 h1,
 h2,
 h3 {
@@ -40,7 +45,7 @@ p {
     margin-bottom: 1rem;
 }
 
-/* Contenedores Estructurales */
+/* Structural Containers */
 header {
     background-color: var(--primary-color);
     color: var(--text-light);
@@ -83,10 +88,15 @@ nav a:active {
 main {
     padding: 1.5rem;
     background-color: #FFFFFF;
-    min-height: calc(100vh - 180px);
+
+    /* Vertical centering of main content */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Listas de elementos (Categorías, Proyectos, etc.) */
+/* Item Lists (Categories, Projects, etc.) */
 main ul {
     list-style: none;
     padding-left: 0;
@@ -110,7 +120,7 @@ footer {
 
 
 /* ==========================================
-   2. REGLAS PARA TABLETAS (MEDIUM)
+   2. TABLET LAYOUT RULES (MEDIUM)
    ========================================== */
 @media (min-width: 600px) {
     header {
@@ -147,12 +157,14 @@ footer {
 
 
 /* ==========================================
-   3. REGLAS PARA ESCRITORIO (LARGE)
+   3. DESKTOP LAYOUT RULES (LARGE)
    ========================================== */
 @media (min-width: 992px) {
     body {
         max-width: 1200px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
 
