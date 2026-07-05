@@ -1,31 +1,211 @@
-html,
-body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
+/* ==========================================
+   1. ESTILOS BASE Y DISPOSITIVOS MÓVILES (SMALL)
+   ========================================== */
+:root {
+    --primary-color: #0F4C81;
+    --secondary-color: #F8F9FA;
+    --text-dark: #212529;
+    --text-light: #FFFFFF;
+    --accent-color: #0056B3;
+    --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-shadow: none;
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 body {
+    font-family: var(--font-stack);
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Tipografía */
+h1,
+h2,
+h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Contenedores Estructurales */
+header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 1rem;
+    text-align: center;
+}
+
+header h1 {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+nav {
+    background-color: #0b3a63;
+    padding: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+nav a {
+    display: block;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+nav a:active {
+    background-color: var(--accent-color);
+}
+
+main {
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+    min-height: calc(100vh - 180px);
+}
+
+/* Listas de elementos (Categorías, Proyectos, etc.) */
+main ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+main li {
+    background: var(--secondary-color);
+    border: 1px solid #dee2e6;
+    margin-bottom: 0.75rem;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+
+/* ==========================================
+   2. REGLAS PARA TABLETAS (MEDIUM)
+   ========================================== */
+@media (min-width: 600px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+    }
+
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    nav a {
+        padding: 0.5rem 1rem;
+    }
+
+    main {
+        padding: 2rem;
+    }
+
+    main ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    main li {
+        margin-bottom: 0;
+    }
+}
+
+
+/* ==========================================
+   3. REGLAS PARA ESCRITORIO (LARGE)
+   ========================================== */
+@media (min-width: 992px) {
+    body {
+        max-width: 1200px;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+        padding: 2rem 3rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
     nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 3rem;
+        background-color: var(--primary-color);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+    nav ul {
+        justify-content: flex-start;
+    }
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+    nav a {
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+    nav a:hover {
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+    }
+
+    main {
+        padding: 3rem;
+        font-size: 1.125rem;
+    }
+
+    main ul {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    main li {
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    main li:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+    }
+
+    footer {
+        padding: 2rem 3rem;
     }
 }
