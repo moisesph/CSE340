@@ -5,6 +5,9 @@ import path from 'path';
 // Run it with 
 // npm run dev
 
+// Finish the server
+// taskkill /F /IM node.exe
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
