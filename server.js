@@ -20,18 +20,18 @@ app.set('views', path.join(__dirname, 'src/views'));
 
 
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const title = 'Home';
     res.render('home', { title });
 });
 
-app.get('/organizations', (req, res) => {
-    const title = 'Organizations';
+app.get('/organizations', async (req, res) => {
+    const title = 'Our Partner Organizations';
     res.render('organizations', { title });
 });
 
-app.get('/projects', (req, res) => {
-    const title = 'Projects';
+app.get('/projects', async (req, res) => {
+    const title = 'Service Projects';
     res.render('projects', { title });
 });
 
