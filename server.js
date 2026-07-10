@@ -11,6 +11,9 @@ import { getAllOrganizations } from './src/models/organizations.js';
 // Finish the server
 // taskkill /F /IM node.exe
 
+// Render site
+// https://cse340-lmgn.onrender.com/
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
