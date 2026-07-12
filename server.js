@@ -6,13 +6,10 @@ import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
 
 
-// Run it with 
 // npm run dev
 
-// Finish the server
 // taskkill /F /IM node.exe
 
-// Render site
 // https://cse340-lmgn.onrender.com/
 
 const __filename = fileURLToPath(import.meta.url);
@@ -39,19 +36,14 @@ app.get('/organizations', async (req, res) => {
     const organizations = await getAllOrganizations();
     const title = 'Our Partner Organizations';
     res.render('organizations', { title, organizations });
-    console.log('Organizations:', organizations); // Log the organizations to the console
+
 });
 
 app.get('/projects', async (req, res) => {
     const projects = await getAllProjects();
     const title = 'Service Projects';
-
     res.render('projects', { title, projects });
-});
 
-app.get('/projects', async (req, res) => {
-    const title = 'Service Projects';
-    res.render('projects', { title });
 });
 
 app.get('/categories', async (req, res) => {

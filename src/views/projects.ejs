@@ -4,10 +4,27 @@
             <%= title %>
         </h1>
         <h2>Upcoming Service Projects</h2>
-        <ul>
-            <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-            <li>Food Drive - Help collect and distribute food to those in need.</li>
-            <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
+
+        <ul class="projects-list">
+            <% projects.forEach(project=> { %>
+                <li>
+                    <!-- Title is now big and prominent -->
+                    <strong class="project-title">
+                        <%= project.title %>
+                    </strong>
+
+                    <!-- Organization and Date grouped together with smaller text -->
+                    <div class="project-meta">
+                        <span class="project-org">
+                            <%= project.organization_name %>
+                        </span>
+                        <span class="project-divider">•</span>
+                        <span class="project-date">
+                            <%= project.date %>
+                        </span>
+                    </div>
+                </li>
+                <% }); %>
         </ul>
     </main>
     <%- include('partials/footer') %>
