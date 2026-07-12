@@ -21,6 +21,12 @@ CREATE TABLE IF NOT EXISTS service_project (
         ON DELETE CASCADE
 );
 
+-- Create project_category table
+CREATE TABLE IF NOT EXISTS project_category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
 -- Insert sample organizations
 INSERT INTO organization (name, description, contact_email, logo_filename)
 VALUES
@@ -51,3 +57,54 @@ VALUES
 (3, 'Riverbank Cleanup', 'Removing trash and recyclable waste along the city river.', 'City River Front', '2026-09-28'),
 (3, 'Winter Coat Distribution', 'Organizing and distributing winter clothing to families in need.', 'St. Mark Community Center', '2026-10-20'),
 (3, 'Youth Reading Mentorship', 'Reading with elementary school students and organizing the school library.', 'Oakridge Elementary', '2026-11-05');
+
+
+
+
+-- Create intermediate table for the many-to-many relationship
+CREATE TABLE IF NOT EXISTS service_project_category (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_project_mapping 
+        FOREIGN KEY (project_id) 
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_category_mapping 
+        FOREIGN KEY (category_id) 
+        REFERENCES project_category(category_id)
+        ON DELETE CASCADE
+);
+
+-- Insert 3 sample categories
+INSERT INTO project_category (name)
+VALUES
+('Construction & Repair'),        -- ID 1
+('Environment & Sustainability'), -- ID 2
+('Community Support');            -- ID 3
+
+-- Associate each of the 15 projects with at least 1 category
+INSERT INTO service_project_category (project_id, category_id)
+VALUES
+-- BrightFuture Builders projects (IDs 1 to 5)
+(1, 1), (1, 3), -- Community Park Renovation (Construction, Community)
+(2, 1), (2, 2), -- Eco-Friendly Shelter Build (Construction, Environment)
+(3, 1),         -- Sidewalk Repair Initiative (Construction)
+(4, 1), (4, 2), -- Solar Lighting Installation (Construction, Environment)
+(5, 1),         -- Community Garden Gazebo (Construction)
+
+-- GreenHarvest Growers projects (IDs 6 to 10)
+(6, 2), (6, 3), -- Urban Orchard Planting (Environment, Community)
+(7, 2),         -- Composting Workshop & Setup (Environment)
+(8, 1), (8, 2), -- Rooftop Garden Setup (Construction, Environment)
+(9, 2), (9, 3), -- Seed Swap & Soil Prep (Environment, Community)
+(10, 1), (10, 2),-- Greenhouse Rehabilitation (Construction, Environment)
+
+-- UnityServe Volunteers projects (IDs 11 to 15)
+(11, 3),        -- Annual Food Drive Sort (Community)
+(12, 3),        -- Senior Citizen Tech Support (Community)
+(13, 2), (13, 3),-- Riverbank Cleanup (Environment, Community)
+(14, 3),        -- Winter Coat Distribution (Community)
+(15, 3);        -- Youth Reading Mentorship (Community)
+
+

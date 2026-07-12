@@ -4,6 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 
 // npm run dev
@@ -47,8 +48,14 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories', async (req, res) => {
-    const title = 'Service Categories';
-    res.render('categories', { title });
+    try {
+        const categories = await getAllCategories();
+        const title = 'Service Categories';
+        res.render('categories', { title, categories });
+    } catch (error) {
+        console.error('Error loading categories:', error);
+        res.status(500).send('Error loading categories');
+    }
 });
 
 
