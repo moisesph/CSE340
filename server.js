@@ -40,6 +40,7 @@ app.get('/organizations', async (req, res) => {
     const title = 'Our Partner Organizations';
 
     res.render('organizations', { title, organizations });
+    console.log('Organizations:', organizations); // Log the organizations to the console
 });
 
 app.get('/projects', async (req, res) => {
