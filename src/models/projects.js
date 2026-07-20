@@ -1,6 +1,6 @@
-import db from './db.js'
+import db from './db.js';
 
-const getAllProjects = async () => {
+export const getAllProjects = async () => {
     const query = `
         SELECT 
             p.project_id, 
@@ -17,9 +17,9 @@ const getAllProjects = async () => {
     const result = await db.query(query);
 
     return result.rows;
-}
+};
 
-const getProjectsByOrganizationId = async (organizationId) => {
+export const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT
           project_id,
@@ -39,4 +39,54 @@ const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
-export { getAllProjects, getProjectsByOrganizationId };
+export const getUpcomingProjects = async (number_of_projects) => {
+    const query = `
+   SELECT 
+    sp.project_id,
+    sp.title,
+    sp.description,
+    sp.date,
+    sp.location,    
+    o.organization_id,
+    o.name AS organization_name
+FROM 
+    service_project sp
+INNER JOIN 
+    organization o ON sp.organization_id = o.organization_id
+WHERE 
+    sp.date >= CURRENT_DATE
+ORDER BY 
+    sp.date ASC
+LIMIT $1;
+      `;
+
+    const queryParams = [number_of_projects];
+    const result = await db.query(query, queryParams);
+
+    return result.rows;
+};
+
+export const getProjectDetails = async (id) => {
+    const query = `
+SELECT 
+    sp.project_id,
+    sp.title,
+    sp.description,
+    sp.date,
+    sp.location,    
+    o.organization_id,
+    o.name AS organization_name
+FROM 
+    service_project sp
+INNER JOIN 
+    organization o ON sp.organization_id = o.organization_id
+WHERE 
+    sp.project_id = $1;
+
+      `;
+
+    const queryParams = [id];
+    const result = await db.query(query, queryParams);
+
+    return result.rows;
+};
