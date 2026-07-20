@@ -284,6 +284,12 @@ main .projects-list .project-title {
     line-height: 1.3;
 }
 
+/* Elimina el estilo de hipervínculo en los headers */
+main .projects-list .project-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Meta container for Org and Date (Same size) */
 main .projects-list .project-meta {
     font-size: 0.95rem;

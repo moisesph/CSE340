@@ -41,7 +41,7 @@ export const getProjectsByOrganizationId = async (organizationId) => {
 
 export const getUpcomingProjects = async (number_of_projects) => {
     const query = `
-   SELECT 
+SELECT 
     sp.project_id,
     sp.title,
     sp.description,
@@ -54,11 +54,11 @@ FROM
 INNER JOIN 
     organization o ON sp.organization_id = o.organization_id
 WHERE 
-    sp.date >= CURRENT_DATE
+    sp.date::date >= CURRENT_DATE
 ORDER BY 
-    sp.date ASC
+    sp.date::date ASC
 LIMIT $1;
-      `;
+    `;
 
     const queryParams = [number_of_projects];
     const result = await db.query(query, queryParams);
@@ -88,5 +88,5 @@ WHERE
     const queryParams = [id];
     const result = await db.query(query, queryParams);
 
-    return result.rows;
+    return result.rows[0];
 };
