@@ -16,12 +16,15 @@
                 <span class="project-divider">•</span>
 
                 <span class="project-org">
-                    <a href="/organization/<%= project.organization_id %>">
-                        <%= project.organization_name %>
-                    </a>
+                    <p>Organization:
+                        <a href="/organization/<%= project.organization_id %>">
+                            <%= project.organization_name %>
+                        </a>,
+                    </p>
                 </span>
                 <span class="project-date">
-                    <%= project.date %>
+                    <p>Date: <%= project.date %>
+                    </p>
                 </span>
 
             </div>
