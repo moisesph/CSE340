@@ -27,7 +27,7 @@ WHERE
         console.error("Error in", error);
         throw error;
     }
-}
+} 
 
 export async function getCategoriesByProject(projectId) {
     try {

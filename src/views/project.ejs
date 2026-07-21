@@ -19,6 +19,21 @@
                             <%= project.date %>
                         </span>
 
+                        <span>
+                            <%= categories.category_id %>
+                                <% categories.forEach(category=> { %>
+                                    <li>
+
+                                        <strong>
+                                            <a href="/category/<%= category.category_id %>">
+                                                <%= category.name %>
+                                            </a>
+                                        </strong>
+
+                                        <% }); %>
+                                            </ul>
+                        </span>
+
                     </div>
         </div>
     </main>
