@@ -6,35 +6,39 @@
             <strong class="project-title">
                 <%= project.title %>
             </strong>
-            <%= project.description %>
-                <%= project.location %>
-                    <div class="project-meta">
-                        <span class="project-divider">•</span>
-                        <span class="project-org">
-                            <a href="/organization/<%= project.organization_id %>">
-                                <%= project.organization_name %>
-                            </a>
-                        </span>
-                        <span class="project-date">
-                            <%= project.date %>
-                        </span>
+            <span>
+                <h2>Description</h2>
+                <%= project.description %>
+                    <%= project.location %>
+            </span>
+            <div class="project-meta">
 
-                        <span>
-                            <%= categories.category_id %>
-                                <% categories.forEach(category=> { %>
-                                    <li>
+                <span class="project-divider">•</span>
 
-                                        <strong>
-                                            <a href="/category/<%= category.category_id %>">
-                                                <%= category.name %>
-                                            </a>
-                                        </strong>
+                <span class="project-org">
+                    <a href="/organization/<%= project.organization_id %>">
+                        <%= project.organization_name %>
+                    </a>
+                </span>
+                <span class="project-date">
+                    <%= project.date %>
+                </span>
 
-                                        <% }); %>
-                                            </ul>
-                        </span>
+            </div>
+            <span>
+                <h2>Categories</h2>
+                <%= categories.category_id %>
+                    <% categories.forEach(category=> { %>
+                        <li>
 
-                    </div>
+                            <strong>
+                                <a href="/category/<%= category.category_id %>">
+                                    <%= category.name %>
+                                </a>
+                            </strong>
+                            <% }); %>
+                                </ul>
+            </span>
         </div>
     </main>
     <%- include('partials/footer') %>
