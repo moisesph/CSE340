@@ -9,13 +9,16 @@ import {
     processNewOrganizationForm,
     organizationValidation,
     showEditOrganizationForm,
-    processEditOrganizationForm
+    processEditOrganizationForm,
 } from './controllers/organizations.js';
 
 
 import {
     showProjectsPage,
-    showProjectDetailsPage
+    showProjectDetailsPage,
+    showNewProjectForm,
+    processNewProjectForm,
+    projectValidation
 } from './controllers/projects.js';
 
 import {
@@ -39,6 +42,7 @@ router.get('/edit-organization/:id', processEditOrganizationForm);
 
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
+router.get('/new-project', showNewProjectForm);
 
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetails);
@@ -47,5 +51,7 @@ router.get('/category/:id', showCategoryDetails);
 router.get('/test-error', testErrorPage);
 
 router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+router.post('/new-project', projectValidation, processNewProjectForm);
 
 export default router;
