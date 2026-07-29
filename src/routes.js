@@ -23,7 +23,9 @@ import {
 
 import {
     showCategoriesPage,
-    showCategoryDetails
+    showCategoryDetails,
+    showAssignCategoriesForm,
+    processAssignCategoriesForm
 } from './controllers/categories.js';
 
 
@@ -46,6 +48,8 @@ router.get('/new-project', showNewProjectForm);
 
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetails);
+router.get('/assign-categories/:projectId', showAssignCategoriesForm);
+router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 
 router.get('/test-error', testErrorPage);

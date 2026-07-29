@@ -27,9 +27,9 @@ WHERE
         console.error("Error in", error);
         throw error;
     }
-} 
+}
 
-export async function getCategoriesByProject(projectId) {
+export async function getCategoriesByServiceProjectId(projectId) {
     try {
         const query = `
 SELECT 
@@ -75,5 +75,30 @@ ORDER BY
     } catch (error) {
         console.error("Error in", error);
         throw error;
+    }
+}
+
+
+export const assignCategoryToProject = async (categoryId, projectId) => {
+    const query = `
+        INSERT INTO service_project_category (category_id, project_id)
+        VALUES ($1, $2);
+    `;
+
+    await db.query(query, [categoryId, projectId]);
+}
+
+
+export const updateCategoryAssignments = async (projectId, categoryIds) => {
+    // First, remove existing category assignments for the project
+    const deleteQuery = `
+        DELETE FROM service_project_category
+        WHERE project_id = $1;
+    `;
+    await db.query(deleteQuery, [projectId]);
+
+    // Next, add the new category assignments
+    for (const categoryId of categoryIds) {
+        await assignCategoryToProject(categoryId, projectId);
     }
 }

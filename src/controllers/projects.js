@@ -6,7 +6,7 @@ import {
     createProject
 } from '../models/projects.js';
 
-import { getCategoriesByProject } from '../models/categories.js';
+import { getCategoriesByServiceProjectId } from '../models/categories.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
@@ -44,7 +44,7 @@ export const showProjectDetailsPage = async (req, res) => {
     const { id } = req.params;
     const project = await getProjectDetails(id);
     const title = 'Project Details';
-    const categories = await getCategoriesByProject(id);
+    const categories = await getCategoriesByServiceProjectId(id);
 
     res.render('project', { title, project, categories });
 };
