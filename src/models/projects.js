@@ -91,7 +91,6 @@ WHERE
     return result.rows[0];
 };
 
-
 export const createProject = async (title, description, location, date, organizationId) => {
     const query = `
       INSERT INTO service_project (title, description, location, date, organization_id)
@@ -108,6 +107,28 @@ export const createProject = async (title, description, location, date, organiza
 
     if (process.env.ENABLE_SQL_LOGGING === 'true') {
         console.log('Created new project with ID:', result.rows[0].project_id);
+    }
+
+    return result.rows[0].project_id;
+};
+
+export const updateProject = async (projectId, title, description, location, date, organizationId ) => {
+    const query = `
+  UPDATE public.service_project
+    SET title = $1, description = $2, location = $3, date = $4, organization_id = $5
+    WHERE project_id = $6
+    RETURNING project_id;
+  `;
+
+    const queryParams = [title, description, location, date, organizationId, projectId];
+    const result = await db.query(query, queryParams);
+
+    if (result.rows.length === 0) {
+        throw new Error('Project not found');
+    }
+
+    if (process.env.ENABLE_SQL_LOGGING === 'true') {
+        console.log('Updated Project with ID:', projectId);
     }
 
     return result.rows[0].project_id;
