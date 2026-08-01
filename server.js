@@ -1,6 +1,8 @@
 // npm run dev
 // taskkill /F /IM node.exe
+
 // https://cse340-lmgn.onrender.com/
+// https://github.com/moisesph/CSE340
 
 import express from 'express';
 import { fileURLToPath } from 'url';
