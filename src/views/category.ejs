@@ -4,8 +4,8 @@
         <h1>
             <%= title %>
         </h1>
-
         <%= category.name %>
+            <a href="/update-category/<%= category.category_id %>">Edit Category</a>
             <ul>
                 <% projects.forEach(project=> { %>
                     <li>
