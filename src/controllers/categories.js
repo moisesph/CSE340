@@ -13,6 +13,16 @@ import { getProjectDetails }
 
 import { body, validationResult } from 'express-validator';
 
+export const categoryValidation = [
+    body('name')
+        .trim()
+        .notEmpty()
+        .withMessage('Category name is required')
+        .isLength({ min: 3, max: 100 })
+        .withMessage('Category name must be between 3 and 100 characters'),
+];
+
+
 export const showCategoriesPage = async (req, res) => {
     const categories = await getAllCategories();
     const title = 'Service Categories';
