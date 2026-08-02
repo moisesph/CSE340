@@ -35,6 +35,10 @@ import {
     processEditCategoryForm
 } from './controllers/categories.js';
 
+import {
+    showUserRegistrationForm,
+    processUserRegistrationForm
+} from './controllers/users.js';
 
 import { testErrorPage } from './controllers/errors.js';
 
@@ -48,7 +52,6 @@ router.get('/new-organization', showNewOrganizationForm);
 router.get('/edit-organization/:id', showEditOrganizationForm);
 router.get('/edit-organization/:id', processEditOrganizationForm);
 
-
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
 router.get('/new-project', showNewProjectForm);
@@ -59,18 +62,22 @@ router.get('/category/:id', showCategoryDetails);
 router.get('/new-category', showNewCategoryForm);
 router.get('/update-category/:id', showEditCategoryForm);
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
-router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
+router.get('/register', showUserRegistrationForm);
 
 router.get('/test-error', testErrorPage);
+
 
 router.post('/new-organization', organizationValidation, processNewOrganizationForm);
 router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
 
 router.post('/new-project', projectValidation, processNewProjectForm);
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
+router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 router.post('/new-category', categoryValidation, processNewCategoryForm);
-router.post('/edit-category/:id',categoryValidation, processEditCategoryForm);
+router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+
+router.post('/register', processUserRegistrationForm);
 
 export default router;
