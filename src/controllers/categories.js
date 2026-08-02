@@ -30,13 +30,6 @@ export const showCategoriesPage = async (req, res) => {
     res.render('categories', { title, categories });
 };
 
-export const categoryValidation = [
-    body('name')
-        .trim()
-        .notEmpty().withMessage('Category name is required')
-        .isLength({ min: 3, max: 100 }).withMessage('Category name must be between 3 and 100 characters')
-];
-
 
 export const showCategoryDetails = async (req, res) => {
     const { id } = req.params;
@@ -80,6 +73,16 @@ export const showNewCategoryForm = async (req, res) => {
 
 export const processNewCategoryForm = async (req, res) => {
     const { name } = req.body;
+
+    const results = validationResult(req);
+    if (!results.isEmpty()) {
+        // Validation failed - loop through errors
+        results.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+        
+        return res.redirect('/new-category');
+    }
 
     try {
         const newCategoryId = await createCategory(name);
