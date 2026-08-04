@@ -1,4 +1,5 @@
 // npm run dev
+// http://127.0.0.1:3000
 // taskkill /F /IM node.exe
 
 // https://cse340-lmgn.onrender.com/
