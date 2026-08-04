@@ -37,7 +37,10 @@ import {
 
 import {
     showUserRegistrationForm,
-    processUserRegistrationForm
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout
 } from './controllers/users.js';
 
 import { testErrorPage } from './controllers/errors.js';
@@ -65,6 +68,9 @@ router.get('/assign-categories/:projectId', showAssignCategoriesForm);
 
 router.get('/register', showUserRegistrationForm);
 
+router.get('/login', showLoginForm);
+router.get('/logout', processLogout);
+
 router.get('/test-error', testErrorPage);
 
 
@@ -79,5 +85,7 @@ router.post('/new-category', categoryValidation, processNewCategoryForm);
 router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
 
 router.post('/register', processUserRegistrationForm);
+
+router.post('/login', processLoginForm);
 
 export default router;

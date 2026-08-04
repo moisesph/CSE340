@@ -4,6 +4,9 @@
 // https://cse340-lmgn.onrender.com/
 // https://github.com/moisesph/CSE340
 
+// I am going by part 4
+
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -63,6 +66,11 @@ app.use((req, res, next) => {
 
 // Middleware to make NODE_ENV available to all templates
 app.use((req, res, next) => {
+    res.locals.isLoggedIn = false;
+    if (req.session && req.session.user) {
+        res.locals.isLoggedIn = true;
+    }
+
     res.locals.NODE_ENV = NODE_ENV;
     next();
 });
