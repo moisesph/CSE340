@@ -5,21 +5,23 @@
             <%= title %>
         </h1>
 
-        <p><a href="/new-category">Add a New Category</a></p>
+        <% if (user && user.role_name==='admin' ) { %>
+            <p><a href="/new-category">Add a New Category</a></p>
+            <% } %>
 
-        <ul>
-            <% if (categories && categories.length> 0) { %>
-                <% categories.forEach(category=> { %>
-                    <li>
-                        <a href="/category/<%= category.category_id %>">
-                            <%= category.name %>
-                        </a>
-                    </li>
-                    <% }) %>
-                        <% } else { %>
-                            <li>No se encontraron categorías.</li>
-                            <% } %>
-        </ul>
+                <ul>
+                    <% if (categories && categories.length> 0) { %>
+                        <% categories.forEach(category=> { %>
+                            <li>
+                                <a href="/category/<%= category.category_id %>">
+                                    <%= category.name %>
+                                </a>
+                            </li>
+                            <% }) %>
+                                <% } else { %>
+                                    <li>No se encontraron categorías.</li>
+                                    <% } %>
+                </ul>
     </main>
 
     <%- include('partials/footer') %>
