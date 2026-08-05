@@ -1,9 +1,14 @@
 // npm run dev
-// http://127.0.0.1:3000
 // taskkill /F /IM node.exe
+// http://127.0.0.1:3000
 
 // https://cse340-lmgn.onrender.com/
 // https://github.com/moisesph/CSE340
+
+// Test Admin: 
+// Name: admin 
+// Email: admin@example.com
+// Password: cse340!
 
 // To create a new admin use:
 // Open pgAdmin and connect to your application database.

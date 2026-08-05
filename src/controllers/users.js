@@ -3,7 +3,8 @@ import {
     createUser,
     findUserByEmail,
     verifyPassword,
-    authenticateUser
+    authenticateUser,
+    getAllUsers
 } from '../models/users.js';
 
 
@@ -114,3 +115,13 @@ export const requireRole = (role) => {
     };
 };
 
+export const showAllUsers = async (req, res) => {
+    try {
+        const users = await getAllUsers();
+        res.render('users', { title: 'All Users', users });
+    } catch (error) {
+        console.error('Error fetching all users:', error);
+        req.flash('error', 'An error occurred while fetching users.');
+        res.redirect('/dashboard');
+    }
+};

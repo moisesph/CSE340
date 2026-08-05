@@ -352,3 +352,88 @@ main .projects-list li:hover {
         gap: 20px;
     }
 }
+
+/* ==========================================
+   5. ALL USERS SECTION
+   ========================================== */
+
+/* Alineación general del main para usuarios */
+.users-view-main {
+    justify-content: flex-start;
+    padding-top: 2rem;
+}
+
+/* Título de la vista */
+.users-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+/* Contenedor de la lista en cuadrícula */
+.users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* Tarjeta individual de usuario, replicando el estilo de proyectos */
+.user-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-left: 5px solid var(--primary-color);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+/* Hover effect */
+.user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(15, 76, 129, 0.15);
+}
+
+/* Nombre resaltado en la tarjeta */
+.user-card p:first-child {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+/* Información secundaria (Email y Rol) */
+.user-card p:not(:first-child) {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Grid para pantallas más grandes (Tablet y Desktop) */
+@media (min-width: 768px) {
+    .users-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Enlace de regreso */
+.users-back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.users-back-link:hover {
+    color: var(--primary-color);
+}
