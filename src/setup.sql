@@ -128,3 +128,19 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS project_volunteer (
+    volunteer_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    project_id INT NOT NULL,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_volunteer_user 
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_volunteer_project 
+        FOREIGN KEY (project_id) 
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT unique_user_project 
+        UNIQUE (user_id, project_id)
+);

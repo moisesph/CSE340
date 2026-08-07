@@ -47,6 +47,10 @@ import {
     showAllUsers
 } from './controllers/users.js';
 
+import {
+    processVolunteerOption
+} from './controllers/volunteers.js';
+
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -93,5 +97,7 @@ router.post('/update-category/:id', requireLogin, requireRole('admin'), category
 router.post('/register', processUserRegistrationForm);
 
 router.post('/login', processLoginForm);
+
+router.post('/project/:projectId', requireLogin, requireRole('user'), processVolunteerOption);
 
 export default router;
