@@ -1,5 +1,6 @@
 import {
-    enterVolunteerIntoProject
+    enterVolunteerIntoProject,
+    getVolunteerAllProjects
 } from '../models/volunteers.js';
 
 
@@ -8,7 +9,6 @@ export const showBeVolunteerOption = async (req, res) => {
 };
 
 export const processVolunteerOption = async (req, res) => {
-
     const { projectId } = req.params;
     const { user_id } = req.session.user;
     try {
@@ -21,5 +21,19 @@ export const processVolunteerOption = async (req, res) => {
         console.error('Error enrolling to the project:', error);
         req.flash('error', 'There was an error enrolling to the project.');
         res.redirect(`/project/${projectId}`);
+    }
+};
+
+
+export const showVolunteerAllProjects = async (req, res, next) => {
+    const { user_id } = req.session.user;
+    try {
+        const projects = await getVolunteerAllProjects(user_id);
+        res.locals.projects = projects;
+        next();
+    } catch (error) {
+        console.error('Error fetching volunteer projects:', error);
+        req.flash('error', 'There was an error fetching your projects.');
+        res.redirect('/dashboard');
     }
 };

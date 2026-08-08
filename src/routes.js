@@ -12,7 +12,6 @@ import {
     processEditOrganizationForm
 } from './controllers/organizations.js';
 
-
 import {
     showProjectsPage,
     showProjectDetailsPage,
@@ -48,7 +47,8 @@ import {
 } from './controllers/users.js';
 
 import {
-    processVolunteerOption
+    processVolunteerOption,
+    showVolunteerAllProjects
 } from './controllers/volunteers.js';
 
 import { testErrorPage } from './controllers/errors.js';
@@ -78,7 +78,7 @@ router.get('/register', showUserRegistrationForm);
 router.get('/login', showLoginForm);
 router.get('/logout', processLogout);
 
-router.get('/dashboard', requireLogin, showDashboard);
+router.get('/dashboard', requireLogin,showVolunteerAllProjects, showDashboard );
 router.get('/users', requireLogin, requireRole('admin'), showAllUsers);
 
 router.get('/test-error', testErrorPage);
