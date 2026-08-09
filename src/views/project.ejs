@@ -1,60 +1,64 @@
 <%- include('partials/header') %>
-    <main>
+    <main class="users-view-main">
 
-        <div class="projects-list">
+        <div class="projects-list" style="display: block; width: 100%; max-width: 800px; margin: 0 auto;">
+            <div class="single-project-card">
+                <h1 class="project-title">
+                    <%= project.title %>
+                </h1>
 
-            <strong class="project-title">
-                <%= project.title %>
-            </strong>
-            <span>
-                <h2>Description</h2>
-                <%= project.description %>
-                    <%= project.location %>
-            </span>
-            <div class="project-meta">
+                <div class="project-section">
+                    <h2>Description</h2>
+                    <p>
+                        <%= project.description %> - <%= project.location %>
+                    </p>
+                </div>
 
-                <span class="project-divider">•</span>
-
-                <span class="project-org">
-                    <p>Organization:
-                        <a href="/organization/<%= project.organization_id %>">
+                <div class="project-meta">
+                    <span class="project-org">
+                        Organization: <a href="/organization/<%= project.organization_id %>">
                             <%= project.organization_name %>
-                        </a>,
-                    </p>
-                </span>
-                <span class="project-date">
-                    <p>Date: <%= project.date %>
-                    </p>
-                </span>
+                        </a>
+                    </span>
+                    <span class="project-divider">•</span>
+                    <span class="project-date">
+                        Date: <%= project.date %>
+                    </span>
+                </div>
 
-            </div>
-            <span>
-                <h2>Categories</h2>
-                <%= categories.category_id %>
-                    <% categories.forEach(category=> { %>
-                        <li>
-
-                            <strong>
+                <div class="project-section">
+                    <h2>Categories</h2>
+                    <ul class="category-tags">
+                        <% categories.forEach(category=> { %>
+                            <li>
                                 <a href="/category/<%= category.category_id %>">
                                     <%= category.name %>
                                 </a>
-                            </strong>
+                            </li>
                             <% }); %>
-                                </ul>
-            </span>
+                    </ul>
+                </div>
+            </div>
 
-        </div>
-        <% if (user && user.role_name==='user' ) { %>
-            <form method="POST">
-                <button type="submit">Be a Volunteer</button>
-            </form>
-            <% } %>
-
-                <% if (user && user.role_name==='admin' ) { %>
-                    <a href="/edit-project/<%= project.project_id %>">Edit Project</a>
+            <div class="project-actions">
+                <% if (user && user.role_name==='user' ) { %>
+                    <form method="POST" action="/project/<%= project.project_id %>">
+                        <% if(project.volunteer_id==null) { %>
+                            <button type="submit" name="modifyBeVolunteer" value="add" class="btn-base btn-add">Be a
+                                Volunteer</button>
+                            <% } else { %>
+                                <button type="submit" name="modifyBeVolunteer" value="remove"
+                                    class="btn-base btn-remove">Remove Enrollment</button>
+                                <% } %>
+                    </form>
                     <% } %>
+
                         <% if (user && user.role_name==='admin' ) { %>
-                            <a href="/assign-categories/<%= project.project_id %>">Edit Categories</a>
+                            <a href="/edit-project/<%= project.project_id %>" class="btn-base btn-edit">Edit Project</a>
+                            <a href="/assign-categories/<%= project.project_id %>" class="btn-base btn-edit">Edit
+                                Categories</a>
                             <% } %>
+            </div>
+        </div>
     </main>
     <%- include('partials/footer') %>

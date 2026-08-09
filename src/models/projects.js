@@ -75,14 +75,17 @@ SELECT
     sp.date,
     sp.location,    
     o.organization_id,
-    o.name AS organization_name
+    o.name AS organization_name,
+    pv.volunteer_id,
+    pv.user_id
 FROM 
     service_project sp
 INNER JOIN 
     organization o ON sp.organization_id = o.organization_id
+LEFT JOIN 
+    project_volunteer pv ON sp.project_id = pv.project_id
 WHERE 
     sp.project_id = $1;
-
       `;
 
     const queryParams = [id];
@@ -112,7 +115,7 @@ export const createProject = async (title, description, location, date, organiza
     return result.rows[0].project_id;
 };
 
-export const updateProject = async (projectId, title, description, location, date, organizationId ) => {
+export const updateProject = async (projectId, title, description, location, date, organizationId) => {
     const query = `
   UPDATE public.service_project
     SET title = $1, description = $2, location = $3, date = $4, organization_id = $5

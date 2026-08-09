@@ -24,3 +24,14 @@ WHERE pv.user_id = $1;
     const result = await db.query(query, queryParams);
     return result.rows;
 };
+
+export const deleteVolunteerFromProject = async (volunteerId, projectId) => {
+    const query = `
+        DELETE FROM project_volunteer 
+WHERE user_id = $1 AND project_id = $2 
+RETURNING volunteer_id;
+    `;
+    const queryParams = [volunteerId, projectId];
+    const result = await db.query(query, queryParams);
+    return result.rows[0];
+};

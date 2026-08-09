@@ -47,8 +47,10 @@ import {
 } from './controllers/users.js';
 
 import {
-    processVolunteerOption,
-    showVolunteerAllProjects
+    modifyVolunteerEnrollment,
+    showVolunteerAllProjects,
+    inDashboardModifyVolunteerEnrollment
+
 } from './controllers/volunteers.js';
 
 import { testErrorPage } from './controllers/errors.js';
@@ -78,7 +80,7 @@ router.get('/register', showUserRegistrationForm);
 router.get('/login', showLoginForm);
 router.get('/logout', processLogout);
 
-router.get('/dashboard', requireLogin,showVolunteerAllProjects, showDashboard );
+router.get('/dashboard', requireLogin, showVolunteerAllProjects, showDashboard);
 router.get('/users', requireLogin, requireRole('admin'), showAllUsers);
 
 router.get('/test-error', testErrorPage);
@@ -98,6 +100,8 @@ router.post('/register', processUserRegistrationForm);
 
 router.post('/login', processLoginForm);
 
-router.post('/project/:projectId', requireLogin, requireRole('user'), processVolunteerOption);
+router.post('/project/:projectId', requireLogin, requireRole('user'), modifyVolunteerEnrollment);
+
+router.post('/dashboard/:projectId', requireLogin, requireRole('user'), inDashboardModifyVolunteerEnrollment);
 
 export default router;
