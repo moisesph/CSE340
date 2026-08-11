@@ -1,6 +1,6 @@
 import db from './db.js';
 
-export const getAllProjects = async () => {
+const getAllProjects = async () => {
     const query = `
         SELECT 
             p.project_id, 
@@ -19,7 +19,7 @@ export const getAllProjects = async () => {
     return result.rows;
 };
 
-export const getProjectsByOrganizationId = async (organizationId) => {
+const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT
           project_id,
@@ -39,7 +39,7 @@ export const getProjectsByOrganizationId = async (organizationId) => {
     return result.rows;
 };
 
-export const getUpcomingProjects = async (number_of_projects) => {
+const getUpcomingProjects = async (number_of_projects) => {
     const query = `
 SELECT 
     sp.project_id,
@@ -66,7 +66,7 @@ LIMIT $1;
     return result.rows;
 };
 
-export const getProjectDetails = async (id) => {
+const getProjectDetails = async (id) => {
     const query = `
 SELECT 
     sp.project_id,
@@ -94,7 +94,7 @@ WHERE
     return result.rows[0];
 };
 
-export const createProject = async (title, description, location, date, organizationId) => {
+const createProject = async (title, description, location, date, organizationId) => {
     const query = `
       INSERT INTO service_project (title, description, location, date, organization_id)
       VALUES ($1, $2, $3, $4, $5)
@@ -115,7 +115,7 @@ export const createProject = async (title, description, location, date, organiza
     return result.rows[0].project_id;
 };
 
-export const updateProject = async (projectId, title, description, location, date, organizationId) => {
+const updateProject = async (projectId, title, description, location, date, organizationId) => {
     const query = `
   UPDATE public.service_project
     SET title = $1, description = $2, location = $3, date = $4, organization_id = $5
@@ -135,4 +135,13 @@ export const updateProject = async (projectId, title, description, location, dat
     }
 
     return result.rows[0].project_id;
+};
+
+export {
+    getAllProjects,
+    getProjectsByOrganizationId,
+    getUpcomingProjects,
+    getProjectDetails,
+    createProject,
+    updateProject
 };
